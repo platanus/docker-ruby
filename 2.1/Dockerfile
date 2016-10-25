@@ -1,4 +1,4 @@
-FROM ruby:2.0.0
+FROM ruby:2.1
 
 MAINTAINER Juan Ignacio Donoso "juan.ignacio@platan.us"
 

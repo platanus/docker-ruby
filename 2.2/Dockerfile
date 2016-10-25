@@ -1,18 +1,41 @@
-FROM platanus/rbenv
+FROM ruby:2.2
 
 MAINTAINER Juan Ignacio Donoso "juan.ignacio@platan.us"
 
-ENV RUBY_ALIAS 2.2
-ENV RUBY_VERSION 2.2.1
+# Update node source
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+  && rm -rf /var/lib/apt/lists/*
+
+# Update and install common dependencies
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    build-essential \
+    curl \
+    git-core \
+    imagemagick \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libevent-dev \
+    libffi-dev \
+    libglib2.0-dev \
+    libjpeg-dev \
+    libmagickcore-dev \
+    libmagickwand-dev \
+    libmysqlclient-dev \
+    libncurses-dev \
+    libpq-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt-dev \
+    libyaml-dev \
+    netcat \
+    nodejs \
+    zlib1g-dev \
+  && rm -rf /var/lib/apt/lists/*
 
 # skip installing gem documentation
 RUN echo 'gem: --no-document' >> "$HOME/.gemrc"
-
-# install ruby and set it as global version
-RUN rbenv install $RUBY_VERSION && ln -s $RBENV_ROOT/versions/$RUBY_VERSION $RBENV_ROOT/versions/$RUBY_ALIAS
-RUN rbenv global $RUBY_ALIAS
-
-# Install bundler
-RUN gem install bundler
 
 CMD [ "irb" ]
