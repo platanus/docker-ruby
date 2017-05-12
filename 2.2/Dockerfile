@@ -6,6 +6,10 @@ MAINTAINER Juan Ignacio Donoso "juan.ignacio@platan.us"
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
   && rm -rf /var/lib/apt/lists/*
 
+# Update yarn source
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list
+
 # Update and install common dependencies
 RUN apt-get update && apt-get install -y \
     autoconf \
@@ -33,6 +37,7 @@ RUN apt-get update && apt-get install -y \
     netcat \
     nodejs \
     zlib1g-dev \
+    yarn \
   && rm -rf /var/lib/apt/lists/*
 
 # skip installing gem documentation
