@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libmagickcore-dev \
     libmagickwand-dev \
-    libmysqlclient-dev \
+    default-libmysqlclient-dev \
     libncurses-dev \
     libpq-dev \
     libreadline-dev \
