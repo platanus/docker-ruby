@@ -1,6 +1,8 @@
 FROM ruby:2.6
 MAINTAINER Juan Ignacio Donoso "juan.ignacio@platan.us"
 
+RUN gem install bundler --version '~> 2.0.2'
+
 # Update node source
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
   && rm -rf /var/lib/apt/lists/*
